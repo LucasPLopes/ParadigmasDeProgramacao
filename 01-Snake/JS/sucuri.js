@@ -1,15 +1,15 @@
 
 
-const CANVAS_BORDER_COLOUR = 'black';
-const CANVAS_BACKGROUND_COLOUR = "lightgreen";
+const CANVAS_BORDER_COLOUR = "black";
+const CANVAS_BACKGROUND_COLOUR = "#00ff3b";
 const SNAKE_COLOUR = "yellow";
-const SNAKE_BORDER_COLOUR = "green";
-const FOOD_COLOUR = "red";
-const FOOD_BORDER_COLOUR = "red"
+const SNAKE_BORDER_COLOUR = "yellow";
+const FOOD_COLOUR = "yellow";
+const FOOD_BORDER_COLOUR = "yellow";
 
 
 let GAME_SPEED =100;
-let MORE_SPEED = 1;
+let MORE_SPEED = 5;
 
 let snake = [
   {x: 150, y: 150},
@@ -42,8 +42,7 @@ function MAIN(){
 
 
     if(didGameEnd()) {
-        alert(`Seu placar foi de ${score} pontos!`,"Fim de jogo")
-
+	       document.getElementById('title').innerHTML =`Você alimentou-se de ${score} criaturas!`;
         return ;
     } 
 
@@ -84,10 +83,13 @@ function drawFood() {
 
 
         score ++;
-        GAME_SPEED -= 10;
+        GAME_SPEED -= MORE_SPEED;
 
         console.log("Game speed invertidade %i",GAME_SPEED);
-        
+	var speed = 10 + (MORE_SPEED *score);
+	var txt = "Velocidade "+speed +" Km/h";
+	document.getElementById('title').innerHTML =txt;
+ 	       
         createFood();
     }
     else
@@ -133,7 +135,9 @@ function createFood(){
 
 
 function drawSnake(){
-    snake.forEach(drawSnakePart)
+    snake.forEach(drawSnakePart);
+
+
 }
 
  function drawSnakePart(snakePart) {
